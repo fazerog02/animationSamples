@@ -1,0 +1,97 @@
+.square{
+    position: absolute;
+    height: 0;
+    width: 0;
+    top: 50vh;
+    left: calc(50vw - 100px);
+    font-family: "URW Gothic";
+    background-color: white;
+    text-align: center;
+    animation:
+            squareAnimationWidth 1000ms ease 100ms forwards,
+            squareAnimationBorderWidth 0ms 100ms forwards,
+            squareAnimationHeight 1000ms ease 1100ms forwards,
+            squareAnimationBorderHeight 0ms 1100ms forwards;
+    transition:
+            background-color 300ms ease 0ms,
+            border 300ms ease 0ms;
+}
+
+.square a{
+    text-decoration: none;
+    color: black;
+    display: block;
+    font-size: 0;
+    animation:
+            squareAnimationWidth 1000ms ease 100ms forwards,
+            squareAnimationHeight 1000ms ease 1100ms forwards,
+            squareAnimationText 1000ms 1100ms forwards;
+    transition: color 300ms ease 0ms;
+}
+
+.square span {
+    position: relative;
+    top: 15%;
+}
+
+.square:hover{
+    background-color: black;
+    border: 2px solid black;
+}
+
+.square a:hover{
+    color: white;
+}
+
+
+
+
+@keyframes squareAnimationWidth{
+    0%{
+        width: 0;
+        height: 2px;
+    }
+
+    100%{
+        width: 200px;
+        height: 2px;
+    }
+}
+
+@keyframes squareAnimationBorderWidth{
+    0%{
+        border-top: 2px solid black;
+    }
+    100%{
+        border-top: 2px solid black;
+    }
+}
+
+@keyframes squareAnimationBorderHeight{
+    0%{
+        border: 2px solid black;
+    }
+    100%{
+        border: 2px solid black;
+    }
+}
+
+@keyframes squareAnimationHeight{
+    0%{
+        height: 2px;
+        top: 50vh;
+    }
+    100%{
+        height: 50px;
+        top: calc(50vh - 25px);
+    }
+}
+
+@keyframes squareAnimationText{
+    0%{
+        font-size: 0;
+    }
+    100%{
+        font-size: 230%;
+    }
+}
