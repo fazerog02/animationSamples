@@ -16,7 +16,7 @@ let NUMBER_OF_SQUARE_ON_LINE = 50;
         square.style.width = SQUARE_SIZE+"vw";
         square.style.height = SQUARE_SIZE+"vw";
         square.style.backgroundColor = "white";
-        square.style.transition = "opacity 500ms 2500ms ease";
+        square.style.transition = "opacity 1000ms 2500ms ease";
         document.getElementById("load_animation_area").appendChild(square);
         square = document.getElementById("square"+i);
         square_list.push(square);
@@ -33,15 +33,38 @@ function setRandomColor(square_list){
     for(let i = 0; i < NUMBER_OF_SQUARE; i++){
         let random_number = getRandomIntInclusive(1,100);
         let color_type;
-        if(random_number >= (1-set_random_counter*4) && random_number < (20-set_random_counter*4)){
+        let probability = [
+            [20, 40, 60, 80, 80],
+            [19, 39, 59, 79, 76],
+            [18, 38, 59, 79, 72],
+            [17, 37, 59, 79, 68],
+            [16, 36, 59, 79, 64],
+            [15, 35, 59, 79, 60],
+            [14, 34, 59, 79, 56],
+            [13, 33, 59, 79, 52],
+            [12, 32, 59, 79, 48],
+            [11, 31, 59, 79, 44],
+            [10, 30, 59, 79, 40],
+            [9, 29, 59, 79, 36],
+            [8, 28, 59, 79, 32],
+            [7, 27, 59, 79, 28],
+            [6, 26, 59, 79, 24],
+            [5, 25, 59, 79, 20],
+            [4, 24, 59, 79, 16],
+            [3, 23, 59, 79, 12],
+            [2, 22, 59, 79, 8],
+            [1, 21, 59, 79, 4],
+            [0, 20, 40, 60, 0]
+        ];
+        if(random_number >= 1 && random_number < probability[set_random_counter][0]){
             color_type = 1;
-        } else if(random_number >= (20-set_random_counter*4) && random_number < (40-set_random_counter*4)){
+        } else if(random_number >= 20 && random_number < probability[set_random_counter][1]){
             color_type = 2;
-        } else if(random_number >= (40-set_random_counter*4) && random_number < (60-set_random_counter*4)){
+        } else if(random_number >= 40 && random_number < probability[set_random_counter][2]){
             color_type = 3;
-        } else if(random_number >= (60-set_random_counter*4) && random_number < (80-set_random_counter*4)){
+        } else if(random_number >= 60 && random_number < probability[set_random_counter][3]){
             color_type = 4;
-        } else if(random_number >= (80-set_random_counter*4) && random_number <= 100){
+        } else if(random_number >= probability[set_random_counter][4] && random_number <= 100){
             color_type = 5;
         }
         switch(color_type){
@@ -63,15 +86,18 @@ function setRandomColor(square_list){
         }
     }
     set_random_counter++;
-    if(set_random_counter > 20){
-        clearInterval(interval);
-        interval = setInterval(clearSquare, 3000)
+    if(set_random_counter > 25){
+        clearInterval(set_random_color_interval);
+        clear_square_interval = setInterval(clearSquare, 3000)
     }
 }
 
 let clearDone = false;
 function clearSquare(){
-    if(clearDone) clearInterval(interval);
+    if(clearDone) {
+        clearInterval(clear_square_interval);
+        return;
+    }
     document.body.removeChild(document.getElementById("load_animation_area"));
     clearDone = true;
 }
@@ -82,12 +108,13 @@ function Transparent(square_list){
     }
 }
 
-let interval, set_random_counter = 0;
+let set_random_color_interval, clear_square_interval;
+let set_random_counter = 0;
 window.onload = function(){
     let square_list = [];
     for(let i = 0; i < NUMBER_OF_SQUARE; i++){
         square_list.push(document.getElementById("square"+i));
     }
-    interval = setInterval(setRandomColor, 100, square_list);
+    set_random_color_interval = setInterval(setRandomColor, 100, square_list);
     Transparent(square_list);
 };
