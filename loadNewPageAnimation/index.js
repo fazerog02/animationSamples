@@ -86,7 +86,7 @@ function setRandomColor(square_list){
         }
     }
     set_random_counter++;
-    if(set_random_counter > 25){
+    if(set_random_counter > 20){
         clearInterval(set_random_color_interval);
         clear_square_interval = setInterval(clearSquare, 3000)
     }
@@ -108,7 +108,7 @@ function Transparent(square_list){
     }
 }
 
-let set_random_color_interval, clear_square_interval;
+var set_random_color_interval, clear_square_interval;
 let set_random_counter = 0;
 window.onload = function(){
     let square_list = [];
